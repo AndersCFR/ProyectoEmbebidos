@@ -1,13 +1,30 @@
 #include <Arduino.h>
 
+int potenciometroR = A0;
+int potenciometroG = A1;
+int potenciometroB = A2;
+int luzR = 9;
+int luzG = 10;
+int luzB = 11;
+int brilloR;
+int brilloG;
+int brilloB;
+
+
 void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
-  pinMode(LED_BUILTIN, OUTPUT);
+  //Salidas PWM
+  pinMode(9, OUTPUT);
+
+  //pinMode(potenciometroR, INPUT);
+  Serial.begin(9600);
 }
 
 void loop() {
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(5000);                       // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  delay(500);                       // wait for a second
+
+  brilloR = map(analogRead(potenciometroR),0,1023,0,255);
+  brilloG = map(analogRead(potenciometroG),0,1023,0,255);
+  brilloB = map(analogRead(potenciometroB),0,1023,0,255);
+  analogWrite(luzR, brilloR);
+  analogWrite(luzG, brilloG);
+  analogWrite(luzB, brilloB);
 }
